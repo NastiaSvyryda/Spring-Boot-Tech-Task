@@ -26,7 +26,7 @@ public class DataBaseRunner implements CommandLineRunner {
 
     @Override
     public void run(String... args) {
-        Lector lector1 = new Lector("Oleksandr", "Zaichenko", Degree.ASSISTANT, BigDecimal.valueOf(1500));
+                Lector lector1 = new Lector("Oleksandr", "Zaichenko", Degree.ASSISTANT, BigDecimal.valueOf(1500));
         Lector lector2 = new Lector("Oleksandr", "Zavgorodniy", Degree.PROFESSOR, BigDecimal.valueOf(2500));
         Lector lector3 = new Lector("Volodymyr", "Khruschakov", Degree.ASSISTANT, BigDecimal.valueOf(1000));
         Lector lector4 = new Lector("Mariya", "Zhukova", Degree.ASSOCIATE_PROFESSOR, BigDecimal.valueOf(3000));
@@ -34,8 +34,12 @@ public class DataBaseRunner implements CommandLineRunner {
         lectorRepository.save(lector2);
         lectorRepository.save(lector3);
         lectorRepository.save(lector4);
+        System.out.println("Available lectors:");
+        lectorRepository.findAll().forEach(l -> System.out.println("\t" + l.getName() + " " + l.getSurname()));
 
         departmentRepository.save(new Department("Computer science", Set.of(lector1, lector2), lector2));
         departmentRepository.save(new Department("Management", Set.of(lector1, lector3, lector4), lector4));
+        System.out.println("Available departments:");
+        departmentRepository.findAll().forEach(d -> System.out.println("\t" + d.getName()));
     }
 }
